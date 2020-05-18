@@ -41,8 +41,6 @@ def on_message(client, userdata, msg):
     elif msg.topic == "/fish_db/request":
         re = feed_DB.Select_Feed(host,port,db)
         re = str(re)
-        print(re)
-        print(type(re))
         r = re.strip("((,),)")
         r = int(float(r))
         
