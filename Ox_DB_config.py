@@ -5,7 +5,17 @@ class MysqlController:
         self.conn = pymysql.connect(host=host, port= port, user= id, password=pw, db=db_name,charset='utf8')
         self.curs = self.conn.cursor()
 
-    def insert_total(self,total):
-        sql = 'INSERT INTO 산소 (산소_d) VALUES (%s)'
+    def insert_avr(self,total):
+        sql = 'INSERT INTO Oxygen (Oxygen_avr) VALUES (%s)'
+        self.curs.execute(sql,(total,))
+        self.conn.commit()
+
+    def insert_max(self,total):
+        sql = 'INSERT INTO Oxygen (Oxygen_max) VALUES (%s)'
+        self.curs.execute(sql,(total,))
+        self.conn.commit()
+
+    def insert_min(self,total):
+        sql = 'INSERT INTO Oxygen (Oxygen_min) VALUES (%s)'
         self.curs.execute(sql,(total,))
         self.conn.commit()

@@ -4,6 +4,14 @@ import feed_DB
 import Ox_DB
 import Temp_DB
 
+
+"""
+토픽이 아닌 / 로 구분 (ex : 온도값/산소값/먹이값)
+처음 1회 실행시 arm 에서 데이터 받으면 회신 해서 접속 연결 확인
+서버 데이터를 AI에서 읽어올 수 있도록 작성
+
+"""
+
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
     if rc == 0:

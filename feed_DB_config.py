@@ -5,19 +5,49 @@ class MysqlController:
         self.conn = pymysql.connect(host=host, port= port, user= id, password=pw, db=db_name,charset='utf8')
         self.curs = self.conn.cursor()
 
-    def insert_total(self,total):
-        sql = 'INSERT INTO 먹이 (먹이_d) VALUES (%s)'
-        self.curs.execute(sql,(total,))
+    def insert(self,t1,t2,t3):
+        sql = 'INSERT INTO Feed (feed_avr, feed_max, feed_min) VALUES (%s, %s, %s)'
+        self.curs.execute(sql,(t1,t2,t3,))
         self.conn.commit()
 
+"""
+    def select(self,host,port,db,sql):
+        mysql_controller = MysqlController(host, port, 'root','kangnam',db)
+        self.curs.execute(sql)
+        self.conn.commit()
+        result = self.curs.fetchall()
+        return result
+"""
+
     def select(self):
-        sql = "SELECT 먹이_p FROM 먹이_pls"
+        sql = "SELECT feed_p FROM Feed_pls"
+        self.curs.execute(sql)
+        self.conn.commit()
+        result = self.curs.fetchall()
+        return result
+
+    def AI_feed_avr(self):
+        sql = "SELECT feed_avr FROM Feed"
+        self.curs.execute(sql)
+        self.conn.commit()
+        result = self.curs.fetchall()
+        return result
+
+    def AI_feed_max(self):
+        sql = "SELECT feed_max FROM Feed"
+        self.curs.execute(sql)
+        self.conn.commit()
+        result = self.curs.fetchall()
+        return result
+
+    def AI_feed_min(self):
+        sql = "SELECT feed_min FROM Feed"
         self.curs.execute(sql)
         self.conn.commit()
         result = self.curs.fetchall()
         return result
 
     def delete(self):
-        sql = "DELETE FROM 먹이_pls"
+        sql = "DELETE FROM Feed_pls"
         self.curs.execute(sql)
         self.conn.commit()
